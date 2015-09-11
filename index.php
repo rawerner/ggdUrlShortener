@@ -1,4 +1,7 @@
-<?php require_once('create.php'); ?>
+<?php
+require_once('create.php');
+require_once('accessUrl.php');
+?>
 
 <!Doctype html>
 <html>
@@ -10,6 +13,7 @@
     <script type="application/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="application/javascript" src="js/main.js"></script>
     <script src="semantic/dist/semantic.min.js"></script>
+    <script type="text/javascript" src="ZeroClipboard.js"></script>
 </head>
 <body>
 <div class="ui raised very padded text container segment ggd-container">
@@ -23,6 +27,7 @@
             <input id="submit" class="ui pink huge button submit" type="submit">
         </form>
     </div>
+    <div class="copyUrl"><?php  echo $newShortUrl ?></div> <button id="click-to-copy">Click To Copy</button>
 </div>
 </body>
 </html>

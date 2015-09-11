@@ -45,8 +45,9 @@ if ($path == "create" && "POST" == $httpMethod) {
 
     $response = array();
     $newShortUrl = 'http://ggd.ly/' . $shortUrl->code;
-    if (!is_null($shortUrl->id)){
-       echo '<div class="copyUrl">' . $newShortUrl . '</div>';
-    }
+    return $newShortUrl;
+//    if (!is_null($shortUrl->id)){
+//       echo '<div class="copyUrl">' . $newShortUrl . '</div>';
+//    }
 
 }
