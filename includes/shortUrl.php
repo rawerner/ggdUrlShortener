@@ -2,12 +2,23 @@
 
 require_once('abstract/DTO_Abstract.php');
 
-class ShortUrl extends DTO_Abstract
+class ShortUrlDTO extends DTO_Abstract
 {
+    protected static $options = array(
+        'validations' => array(
+            'code' => array(
+                'maxlength' => 5,
+                'notNull' => false
+            ),
+            'url' => array(
+                'maxlength' => 2083,
+                'notNull' => false
+            )
+        )
+    );
+
     public $id;
-
     public $url;
-
     public $code;
 
     function setId($id)

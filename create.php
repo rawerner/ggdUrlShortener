@@ -13,10 +13,8 @@ $httpMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
 $url = NULL;
 
 // if url is /create and POST then create code and save to code and url database
-if ($path == "create" && "POST" == $httpMethod)
-{
-    if (isset($_POST['url']))
-    {
+if ($path == "create" && "POST" == $httpMethod) {
+    if (isset($_POST['url'])) {
         $url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL);
     }
     //create random code
@@ -24,8 +22,31 @@ if ($path == "create" && "POST" == $httpMethod)
     $code = substr($code, 0, 5);
 
     // create new shortUrl object
-    $shortUrl = new ShortUrl();
+    $shortUrl = new ShortUrlDTO();
     $shortUrl->setUrl($url);
-    $shortUrl->setCode($code);
-    $database->insertNewUrl($shortUrl);
+    $shortUrl->setCode($code);;
+
+    $sql = "INSERT INTO short_url (`url`,`code`) VALUES (:url,:code)";
+    try {
+        $database->beginTransaction();
+        $stmt = $database->prepare($sql);
+        $stmt->bindValue(':url', $shortUrl->url, PDO::PARAM_STR);
+        $stmt->bindValue(':code', $shortUrl->code, PDO::PARAM_STR);
+        $stmt->execute();
+        $newId = $database->lastInsertId();
+        $database->commit();
+        $shortUrl->setId($newId);
+    } catch (Exception $e) {
+        error_log("An error occured while binding data");
+        error_log($e->getMessage());
+        $database->rollBack();
+        return false;
+    }
+
+    $response = array();
+    $newShortUrl = 'http://ggd.ly/' . $shortUrl->code;
+    if (!is_null($shortUrl->id)){
+       echo '<div class="copyUrl">' . $newShortUrl . '</div>';
+    }
+
 }

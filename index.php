@@ -1,10 +1,29 @@
 <?php require_once('create.php'); ?>
 
+<!Doctype html>
 <html>
-    <body>
-        <form action="/create" method="post">
-            Paste URL: <input type="text" name="url"><br>
-            <input type="submit">
+<head>
+    <meta charset="utf-8">
+    <title>Girl Geek Dinner | Url Shortener</title>
+    <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script type="application/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="application/javascript" src="js/main.js"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+</head>
+<body>
+<div class="ui raised very padded text container segment ggd-container">
+    <div class="ui huge header center aligned purple ggd-title">Girl Geek Dinner <br/>Url Shortener</div>
+    <div class="one fields">
+        <form class="ui center aligned form" action="/create" method="post">
+            <div class="field">
+                <label>Paste URL:</label>
+                <input placeholder="http://domain.com" type="text" name="url">
+            </div>
+            <input id="submit" class="ui pink huge button submit" type="submit">
         </form>
-    </body>
+    </div>
+</div>
+</body>
 </html>
+
